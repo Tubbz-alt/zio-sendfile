@@ -1,8 +1,9 @@
 [package]
 name = "zio-sendfile"
-version = "0.1.0"
+version = "0.1.1"
 description = "zero-copy I/O for Linux, supporting stable rustc versions"
 authors = ["Michael Aaron Murphy <mmstickman@gmail.com>"]
+repository = "https://github.com/pop-os/zio-sendfile"
 license = "MIT"
 readme = "README.md"
 categories = ["filesystem", "os::unix-apis"]
