@@ -1,0 +1,12 @@
+[package]
+name = "zio-sendfile"
+version = "0.1.0"
+description = "zero-copy I/O for Linux, supporting stable rustc versions"
+authors = ["Michael Aaron Murphy <mmstickman@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+categories = ["filesystem", "os::unix-apis"]
+tags = ["zero-copy", "I/O", "linux", "sendfile"]
+
+[dependencies]
+libc = "0.2.46"
