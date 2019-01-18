@@ -14,19 +14,23 @@ extern crate zio_sendfile;
 
 let mut source = File::open("source_path").unwrap();
 let mut dest = File::create("dest_path").unwrap();
+let bytes_per_write = 100 * 1024 * 1024;
 
-zio_sendfile::copy(&mut source, &mut dest);
+zio_sendfile::copy(&mut source, &mut dest, bytes_per_write);
 ```
 
-If you need a more elaborate configuration, the builder pattern is possible using either the `SendFile` or `SendFd` types:
+Note that the source and destination does not need to be a `File`, but can be any type which implements `AsRawFd`.
+
+If you need a more elaborate configuration, the builder pattern is possible using the `SendFile` type:
 
 ```rust
 extern crate zio_sendfile;
 
 let mut source = File::open("source_path").unwrap();
-SendFile::new(&mut source)
-    .count(bytes_to_copy)
+SendFile::new(&mut source, 100 * 1024 * 1024)
     .offset(bytes_to_offset)
     .send(&mut File::create("dest_path").unwrap()).unwrap();
 ```
-```
+
+Each write will update the offset integer stored within the `SendFile`, so it can be
+used to track the progress of a copy.
